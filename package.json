@@ -1,0 +1,26 @@
+{
+  "name": "v-signals",
+  "version": "0.0.1",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "bun run build:declaration && bun build src --outdir ./dist -e vue",
+    "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json"
+  },
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^17.4.4",
+    "@vue/test-utils": "^2.4.6",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.13",
+    "typescript": "^5.8.2"
+  }
+}

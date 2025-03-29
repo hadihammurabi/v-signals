@@ -29,12 +29,14 @@ describe("vSignal", () => {
       directives: { signal: vSignal },
       setup() { return { x } },
     });
-    expect(wrapper.attributes().value).toBe("9");
+    const input = wrapper.find("input");
+
+    expect(input.element.value).toBe("9");
 
     setX(99);
     await new Promise((r) => setTimeout(r, 300));
 
-    expect(wrapper.attributes().value).toBe("99");
+    expect(input.element.value).toBe("99");
   });
 
 });

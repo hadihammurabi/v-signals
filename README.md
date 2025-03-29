@@ -1,15 +1,14 @@
-# vue-signals
+# v-signals
 
-To install dependencies:
+Example:
+```vue
+<script setup>
+import { signal } from "signal";
+const [title, setTitle] = signal("");
+</script>
 
-```bash
-bun install
+<template>
+  <h1 v-signal="title"></h1>
+  <input type="text" @keyup="(e) => setTitle(e.target?.value)" />
+</template>
 ```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.42. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.

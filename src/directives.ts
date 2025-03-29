@@ -1,12 +1,18 @@
 export const vSignal = {
   mounted(el: HTMLElement, binding: any) {
     const getter = binding.value;
-    el.textContent = getter();
-    let scheduled = false;
+    const attr = binding.arg;
+
     
     const update = () => {
-      el.textContent = getter();
+      if (attr) {
+        el.setAttribute(attr, getter());
+      } else {
+        el.textContent = getter();
+      }
     };
+
+    update();
     
     if (!getter._subscribers) {
       getter._subscribers = new Set();

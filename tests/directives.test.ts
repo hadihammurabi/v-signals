@@ -1,7 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { signal } from "../src";
 import { mount } from "@vue/test-utils";
-import { vSignal } from "../src/directives";
+import { vSignal, vSignalModel } from "../src/directives";
 
 describe("vSignal", () => {
   it("should update the text content on value updates", async () => {
@@ -35,6 +35,27 @@ describe("vSignal", () => {
     await new Promise((r) => setTimeout(r, 300));
 
     expect(wrapper.attributes().value).toBe("99");
+  });
+
+});
+
+describe("vSignalModel", () => {
+  it("should update the attribute on value updates", async () => {
+    const [x, setX] = signal(9);
+
+    const wrapper = mount({
+      template: '<input v-signal-model="[x, setX]" />',
+      directives: { signalModel: vSignalModel },
+      setup() { return { x, setX } },
+    });
+    const input = wrapper.find("input");
+
+    expect(input.element.value).toBe("9");
+
+    await input.setValue(99);
+    await new Promise((r) => setTimeout(r, 300));
+
+    expect(input.element.value).toBe("99");
   });
 
 });
